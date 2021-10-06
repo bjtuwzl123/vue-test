@@ -1,85 +1,19 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+  <div class="transition">
+    <input type="button" value="animation" @click="animation">
+    <input type="button" value="nativeJs" @click="nativeJs">
+    <input type="button" value="requestAnimationFrame" @click="requestAnimationFrame">
+    <input type="button" value="canvasFrame" @click="canvasFrame">
+    <input type="button" value="svgFrame" @click="svgFrame">
+    <input type="button" value="toggle" @click="flag=!flag">
+    <input type="button" value="toggle2" @click="flag2=!flag2">
+    <transition>
+        <h3 v-if="flag">这是一个H3</h3>
+    </transition>
+
+    <transition  name="my">  <!--区分不同组织间动画-->
+        <h6 v-if="flag2">这是一个H6</h6>
+    </transition>
   </div>
 </template>
 
@@ -88,7 +22,26 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      // msg: 'Welcome to Your Vue.js App',
+      flag : false,
+      flag2 : false,
+    }
+  },
+  methods: {
+    animation(){
+      this.$router.push('/animation')
+    },
+    nativeJs(){
+      this.$router.push('/nativeJs')
+    },
+    requestAnimationFrame(){
+      this.$router.push('/requestAnimationFrame')
+    },
+    canvasFrame(){
+      this.$router.push('/canvasFrame')
+    },
+    svgFrame(){
+      this.$router.push('/svgFrame')
     }
   }
 }
@@ -96,18 +49,21 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
+.v-enter,.v-leave-to{
+    opacity:  0;/*透明度*/
+    transform: translateX(150px);
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+  /*入场(离场)动画的时间段   */
+.v-enter-active,.v-leave-active{
+    transition: all 0.8s ease;
+
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+.my-enter,.my-leave-to{
+    opacity:  0;/*透明度*/
+    transform: translateY(70px);
 }
-a {
-  color: #42b983;
+.my-enter-active,.my-leave-active{
+    transition: all 0.8s ease;
+
 }
 </style>
